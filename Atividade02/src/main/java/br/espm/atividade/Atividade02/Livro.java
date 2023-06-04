@@ -5,60 +5,34 @@ import jakarta.persistence.Id;
 @Entity
 public class Livro {
     @Id
-    private String id;
-    private String titulo;
-    private String autor;
-    private String editora;
-    private int ano;
-    private double preco;
+    String id_livro;
+    String nome_livro;
+    String autor_livro;
+    String editora_livro;
+    int ano_livro;
+    double preco_livro;
 
     public Livro(){
 
     }
 
     public Livro(String id, String titulo, String autor, String editora, int ano, double preco){
-        this.id = id;
-        this.titulo = titulo;
-        this.autor = autor;
-        this.editora = editora;
-        this.ano = ano;
-        this.preco = preco;
+        this.id_livro = id;
+        this.nome_livro = titulo;
+        this.autor_livro = autor;
+        this.editora_livro = editora;
+        this.ano_livro = ano;
+        this.preco_livro = preco;
     }
 
-    public int getAno() {
-        return ano;
-    }
-    public String getAutor() {
-        return autor;
-    }
-    public String getEditora() {
-        return editora;
-    }
-    public String getId() {
-        return id;
-    }
-    public double getPreco() {
-        return preco;
-    }
-    public String getTitulo() {
-        return titulo;
-    }
-    public void setAno(int ano) {
-        this.ano = ano;
-    }
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-    public void setEditora(String editora) {
-        this.editora = editora;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+   @Override
+   public String toString() {
+    String aux = "";
+    aux += "nome: " + nome_livro + "\n";
+    aux += "autor: " + autor_livro + "\n";
+    aux += "editora: " + editora_livro + "\n";
+    aux += "ano: " + ano_livro + "\n";
+    aux += "preco: " + preco_livro + "\n";
+    return aux;
+   }
 }
