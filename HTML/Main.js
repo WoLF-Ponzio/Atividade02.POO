@@ -7,10 +7,10 @@ async function listarLivros() {
             }
         });
         const result = await response.json();
-        var lista = document.getElementById('texto');
+        var lista = document.getElementById("texto");
         lista.innerHTML = '';
-        result.forEach(Livro => {  
-            lista += Livro.nome_livro;
+        result.forEach(livro => {  
+            lista += livro.nome_livro;
         });
     } catch (error) {
         console.error("Error:", error);

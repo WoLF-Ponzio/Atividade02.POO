@@ -1,15 +1,23 @@
 package br.espm.atividade.Atividade02;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
 public class Livro {
     @Id
+    @JsonProperty("id_livro")
     String id_livro;
+    @JsonProperty("nome_livro")
     String nome_livro;
+    @JsonProperty("autor_livro")
     String autor_livro;
+    @JsonProperty("editora_livro")
     String editora_livro;
+    @JsonProperty("ano_livro")
     int ano_livro;
+    @JsonProperty("preco_livro")
     double preco_livro;
 
     public Livro(){
