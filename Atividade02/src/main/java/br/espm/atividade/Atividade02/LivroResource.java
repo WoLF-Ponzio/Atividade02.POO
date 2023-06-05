@@ -32,7 +32,7 @@ public class LivroResource {
     }
 
     @GetMapping("/buscar/{id}")
-    public Livro dadosLivro(@RequestParam String id) {
+    public Livro dadosLivro(@PathVariable("id") String id) {
         return livroService.dadosLivro(id);
     }
 

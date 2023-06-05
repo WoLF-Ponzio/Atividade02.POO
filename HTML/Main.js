@@ -95,17 +95,19 @@ async function deletarLivro(id) {
 
 async function selecionarLivro(id) {
     try {
-        const result = await fetch(`http://localhost:8080/livros/${id}`, {
+        const result = await fetch(`http://localhost:8080/livros/buscar/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             }
         });
         var livro = await result.json();
-        document.getElementById('detail-id').value = livro.id_livro;
-        document.getElementById('detail-nome').value = livro.nome_livro;
-        document.getElementById('detail-sigla').value = livro.sigla_livro;
-        document.getElementById('detail-simbolo').value = livro.simbolo_livro;
+        document.getElementById('detail-id_livro').value = livro.id_livro;
+        document.getElementById('detail-nome_livro').value = livro.nome_livro;
+        document.getElementById('detail-autor_livro').value = livro.autor_livro;
+        document.getElementById('detail-editora_livro').value = livro.editora_livro;
+        document.getElementById('detail-ano_livro').value = livro.ano_livro;
+        document.getElementById('detail-preco_livro').value = livro.preco_livro;
     } catch (error) {
         console.error("Error:", error);
     }
