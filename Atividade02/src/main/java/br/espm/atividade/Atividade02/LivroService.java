@@ -44,4 +44,17 @@ public class LivroService {
         return livroRepository.save(livModel.newLiv());
     }
 
+    public void atualizarLivro(String id, Livro livro) {
+        livroRepository.findById(id).map(update -> {
+            update.nome_livro = livro.nome_livro;
+            update.autor_livro = livro.autor_livro;
+            update.editora_livro = livro.editora_livro;
+            update.ano_livro = livro.ano_livro;
+            update.preco_livro = livro.preco_livro;
+            return livroRepository.save(update);
+        });
+        
+        
+    }
+
 }

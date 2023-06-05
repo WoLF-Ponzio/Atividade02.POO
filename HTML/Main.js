@@ -79,6 +79,33 @@ async function cadastrarLivro() {
     }
 }
 
+async function atualizarLivro() {
+    var Livro = {
+        "id_livro": document.getElementById('detail-id_livro').value,
+        "nome_livro": document.getElementById('detail-nome_livro').value,
+        "autor_livro": document.getElementById('detail-autor_livro').value,
+        "editora_livro": document.getElementById('detail-editora_livro').value,
+        "ano_livro": document.getElementById('detail-ano_livro').value,
+        "preco_livro": document.getElementById('detail-preco_livro').value
+    }
+    
+    let envio = {
+        method: "UPDATE",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(Livro)
+    };
+
+    try {
+        let response = await fetch(`http://localhost:8080/livros/update/${document.getElementById('detail-id_livro').value}`, envio);
+        listLivros();
+     } catch (error) {
+         console.error("Error:", error);
+     }
+}
+
+
 async function deletarLivro(id) {
     try {
         const response = await fetch(`http://localhost:8080/livros/${id}`, {
