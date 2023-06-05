@@ -72,7 +72,7 @@ async function cadastrarLivro() {
     };
     
     try {
-       let response = await fetch("http://localhost:8080/livros/post/post", envio);
+       let response = await fetch("http://localhost:8080/livros/post", envio);
        listLivros();
     } catch (error) {
         console.error("Error:", error);
