@@ -1,4 +1,5 @@
 package br.espm.atividade.Atividade02;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RequestMapping("/livros")
 public class LivroResource {
-    private LivroRepository livroRepository;
+
+    private LivroService livroService;
 
     @Autowired
-    public LivroService livroService;
-
-    public void LivroController(LivroRepository livroRepository) {
-        this.livroRepository = livroRepository;
+    public LivroResource(LivroService livroService) {
+        this.livroService = livroService;
     }
 
     @GetMapping()
@@ -30,21 +30,19 @@ public class LivroResource {
         return livroService.listarLivros();
     }
 
-    @GetMapping("/livros/buscar")
+    @GetMapping("/buscar")
     public ResponseEntity<List<Livro>> buscarLivrosPorTitulo(@RequestParam String titulo) {
         List<Livro> livrosEncontrados = livroService.buscarLivrosPorTitulo(titulo);
 
-    if (!livrosEncontrados.isEmpty()) {
-        return ResponseEntity.ok(livrosEncontrados);
-    } else {
-        return ResponseEntity.notFound().build();
+        if (!livrosEncontrados.isEmpty()) {
+            return ResponseEntity.ok(livrosEncontrados);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-}
 
     @PostMapping("/post")
     public Livro adicionarLivro(@RequestBody Livro livro) {
         return livroService.novoLivro(livro);
     }
-    
-
 }

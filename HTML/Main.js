@@ -63,7 +63,6 @@ async function cadastrarLivro() {
         "ano_livro": document.getElementById('detail-ano_livro').value,
         "preco_livro": document.getElementById('detail-preco_livro').value   
     }
-
     let envio = {
         method: "POST",
         headers: {
@@ -73,7 +72,7 @@ async function cadastrarLivro() {
     };
     
     try {
-       let response = await fetch("http://localhost:8080/livros/post", envio);
+       let response = await fetch("http://localhost:8080/livros/post/post", envio);
        listLivros();
     } catch (error) {
         console.error("Error:", error);
