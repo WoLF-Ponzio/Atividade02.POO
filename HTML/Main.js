@@ -160,56 +160,89 @@ async function selecionarLivro(id) {
     }
 }
 
+
+
+
+
+
+
 async function pesquisarLivro() {
-    var buscarLivro = document.getElementById('busca').value.toString();
+
+    lista.innerHTML = '';
+
+    var buscaLivro = document.getElementById('filter').value;
+
     try {
-        fetch(`http://localhost:8080/livros/buscar?termo=${termo}`)
-        .then(response => response.json())
-        .then(data => {
-        // Processar os dados retornados
-        console.log(data);
-    })
-        const result = await response.json();
-        var lista = document.getElementById('lista');
-        lista.innerHTML = '';
-        result.forEach(livroModel => {
-            var linha = document.createElement('tr');
-
-            var id = document.createElement('td');
-            id.innerHTML = '<a href="javascript:selecionarLivro(\'' + livroModel.id_livro + '\');">' + livroModel.id_livro + '</a>';
-            linha.appendChild(id);
-
-            var titulo = document.createElement('td');
-            titulo.innerHTML = livroModel.nome_livro;
-            linha.appendChild(titulo);
-
-            var autor = document.createElement('td');
-            autor.innerHTML = livroModel.autor_livro;
-            linha.appendChild(autor);
-
-            var editora = document.createElement('td');
-            editora.innerHTML = livroModel.editora_livro;
-            linha.appendChild(editora);
-
-            var ano = document.createElement('td');
-            ano.innerHTML = livroModel.ano_livro;
-            linha.appendChild(ano);
-
-            var preco = document.createElement('td');
-            preco.innerHTML = livroModel.preco_livro;
-            linha.appendChild(preco);
-
-
-            var acoes = document.createElement('td');
-            acoes.innerHTML = '<button onClick="deletarLivro(\'' + livroModel.id_livro + '\');">x</button>';
-            linha.appendChild(acoes);
-
-            lista.appendChild(linha);
+        const response = await fetch(`http://localhost:8080/livros`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
+
+        const result = await response.json();
+
+        for (let index = 0; index < result.length; index++) {
+
+            if (result[index].autor_livro == buscaLivro || result[index].nome_livro == buscaLivro) {
+
+
+                livro = result[index];
+
+                var linha = document.createElement('tr');
+
+                var id = document.createElement('td');
+                id.innerHTML = result[index].id_livro;
+                linha.appendChild(id_livro);
+
+                var nome = document.createElement('td');
+                nome.innerHTML = result[index].nome_livro;
+                linha.appendChild(nome_livro);
+
+                var autor = document.createElement('td');
+                autor.innerHTML = result[index].autor_livro;
+                linha.appendChild(autor_livro);
+
+                var editora = document.createElement('td');
+                editora.innerHTML = result[index].editora_livro;
+                linha.appendChild(editora_livro);
+
+                var ano = document.createElement('td');
+                ano.innerHTML = result[index].ano_livro;
+                linha.appendChild(ano_livro);
+
+                var preco = document.createElement('td');
+                preco.innerHTML = result[index].preco_livro;
+                linha.appendChild(preco_livro);
+
+
+                var acoes = document.createElement('td');
+                acoes.innerHTML = `<button class = "botao" onClick="deleteLivro('${livro.id_livro}');">x</button>`;
+
+                linha.appendChild(acoes);
+
+                var atualizar = document.createElement('td');
+                atualizar.innerHTML = `<button class = "botaotwo" onClick="atualizarLivro('${livro.id_livro}');">&#10003;</button>`;
+
+                linha.appendChild(atualizar);
+
+                lista.appendChild(linha);
+
+            }
+
+        }
+
+
     } catch (error) {
         console.error("Error:", error);
     }
 }
+
+
+
+
+
+
 
 async function calvarLivro() {
     document.getElementById('detail-id_livro').value = '';
