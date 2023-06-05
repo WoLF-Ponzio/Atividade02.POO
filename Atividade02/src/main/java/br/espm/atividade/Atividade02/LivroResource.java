@@ -3,6 +3,8 @@ package br.espm.atividade.Atividade02;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,8 +39,8 @@ public class LivroResource {
         return livroService.dadosLivro(id);
     }
 
-    @GetMapping("/buscar")
-    public ResponseEntity<List<Livro>> buscarNomeAutor(@RequestParam String busca) {
+    @Query("/buscar")
+    public ResponseEntity<List<Livro>> buscarNomeAutor(@Param("busca") String busca) {
         List<Livro> livrosEncontrados = livroService.buscarNomeAutor(busca);
 
         if (!livrosEncontrados.isEmpty()) {
@@ -54,7 +56,7 @@ public class LivroResource {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> atualizarLivro(@PathVariable String id, @RequestBody Livro livro) {
+    public ResponseEntity<String> atualizarLivro(@RequestBody Livro livro, @PathVariable String id) {
         livroService.atualizarLivro(id, livro);
         return ResponseEntity.ok("Recurso atualizado com sucesso");
     }

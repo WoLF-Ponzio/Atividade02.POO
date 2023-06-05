@@ -74,13 +74,23 @@ async function cadastrarLivro() {
     try {
        let response = await fetch("http://localhost:8080/livros/post", envio);
        listLivros();
+       if (response.ok) {
+            console.log('Livro cadastrado com sucesso');
+            alert('Livro cadastrado com sucesso');
+            listLivros();
+        } else {
+            console.error('Falha ao cadastrar o livro:', response.status, response.statusText);
+            alert('Falha ao cadastrar o livro:', response.status, response.statusText);
+        }
     } catch (error) {
-        console.error("Error:", error);
+        console.error('Erro na requisição do cadastro:', error);
+        alert('Erro na requisição do cadastro:', error);
     }
 }
 
-async function atualizarLivro() {
-    var Livro = {
+async function atualizarLivro(id) {
+    id = document.getElementById('detail-id_livro').value;
+    let = Livro = {
         "id_livro": document.getElementById('detail-id_livro').value,
         "nome_livro": document.getElementById('detail-nome_livro').value,
         "autor_livro": document.getElementById('detail-autor_livro').value,
@@ -88,21 +98,30 @@ async function atualizarLivro() {
         "ano_livro": document.getElementById('detail-ano_livro').value,
         "preco_livro": document.getElementById('detail-preco_livro').value
     }
-    
-    let envio = {
-        method: "UPDATE",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(Livro)
-    };
 
     try {
-        let response = await fetch(`http://localhost:8080/livros/update/${document.getElementById('detail-id_livro').value}`, envio);
-        listLivros();
-     } catch (error) {
-         console.error("Error:", error);
-     }
+        const response = await fetch(`http://localhost:8080/livros/update/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(Livro)
+        });
+    
+        if (response.ok) {
+            console.log('Livro atualizado com sucesso');
+            alert('Livro atualizado com sucesso');
+            listLivros();
+        } else {
+            console.error('Falha ao atualizar o livro:', response.status, response.statusText);
+            alert('Falha ao atualizar o livro:', response.status, response.statusText);
+        }
+    } catch (error) {
+        console.error('Erro na requisição de Update:', error);
+        alert('Erro na requisição de Update:', error);
+    }
+    listLivros();
+    
 }
 
 
@@ -116,7 +135,8 @@ async function deletarLivro(id) {
         });
         listLivros();
     } catch (error) {
-        console.error("Error:", error);
+        console.error('Erro na requisição de Delete:', error);
+        alert('Erro na requisição de Delete:', error);
     }
 }
 
@@ -140,10 +160,55 @@ async function selecionarLivro(id) {
     }
 }
 
-async function filterMoedas() {
-    var filter = document.getElementById('id_livro').value.toString().trim();
-    if (filter.length < 3) return;
-    listLivros();
+async function pesquisarLivro() {
+    var buscarLivro = document.getElementById('busca').value.toString();
+    try {
+        fetch(`http://localhost:8080/livros/buscar?termo=${termo}`)
+        .then(response => response.json())
+        .then(data => {
+        // Processar os dados retornados
+        console.log(data);
+    })
+        const result = await response.json();
+        var lista = document.getElementById('lista');
+        lista.innerHTML = '';
+        result.forEach(livroModel => {
+            var linha = document.createElement('tr');
+
+            var id = document.createElement('td');
+            id.innerHTML = '<a href="javascript:selecionarLivro(\'' + livroModel.id_livro + '\');">' + livroModel.id_livro + '</a>';
+            linha.appendChild(id);
+
+            var titulo = document.createElement('td');
+            titulo.innerHTML = livroModel.nome_livro;
+            linha.appendChild(titulo);
+
+            var autor = document.createElement('td');
+            autor.innerHTML = livroModel.autor_livro;
+            linha.appendChild(autor);
+
+            var editora = document.createElement('td');
+            editora.innerHTML = livroModel.editora_livro;
+            linha.appendChild(editora);
+
+            var ano = document.createElement('td');
+            ano.innerHTML = livroModel.ano_livro;
+            linha.appendChild(ano);
+
+            var preco = document.createElement('td');
+            preco.innerHTML = livroModel.preco_livro;
+            linha.appendChild(preco);
+
+
+            var acoes = document.createElement('td');
+            acoes.innerHTML = '<button onClick="deletarLivro(\'' + livroModel.id_livro + '\');">x</button>';
+            linha.appendChild(acoes);
+
+            lista.appendChild(linha);
+        });
+    } catch (error) {
+        console.error("Error:", error);
+    }
 }
 
 async function calvarLivro() {
