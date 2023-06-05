@@ -18,7 +18,7 @@
     <div class="container-fluid p-2">
         <div class="form-floating">
             <input type="text" class="form-control autocomplete" id="busca" placeholder="Procurar" name="busca" onkeyup='pesquisarLivro();''>
-            <label for="filter" class="form-label">Procurar</label>
+            <label for="filter" class="form-label">Digite o nome ou autor do livro</label>
         </div>
     </div>
     <div class="container-fluid">
@@ -45,9 +45,10 @@
                   <input type="text" class="form-control" id="detail-preco_livro" name="detail-preco_livro" placeholder="Preço">
                 </div>
             </div>
-            <button onclick="calvarLivro();">Limpar campos</button>
             <button onclick="cadastrarLivro();">Cadastrar novo livro</button>
             <button onclick="atualizarLivro();">Atualizar livro</button>
+            <button onclick="calvarLivro();">Limpar campos</button>
+            <button onclick="listLivros();">Resetar a Lista de Livros</button>
         </div>
     </div>
     <div class="container-fluid p-2">
