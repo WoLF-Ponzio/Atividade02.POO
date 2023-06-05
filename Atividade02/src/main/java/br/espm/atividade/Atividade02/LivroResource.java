@@ -41,9 +41,10 @@ public class LivroResource {
     }
 }
 
-    @PostMapping
+    @PostMapping()
     public Livro adicionarLivro(@RequestBody Livro livro) {
-        return livroRepository.save(livro);
+        return livroService.novoLivro(livro);
     }
+    
 
 }

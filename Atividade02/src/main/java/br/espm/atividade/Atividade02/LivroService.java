@@ -28,4 +28,10 @@ public class LivroService {
             }
         return busca;
     }
+
+    public Livro novoLivro(Livro livro) {
+        LivroModel livModel = new LivroModel(livro);
+        return livroRepository.save(livModel.newLiv());
+    }
+
 }
