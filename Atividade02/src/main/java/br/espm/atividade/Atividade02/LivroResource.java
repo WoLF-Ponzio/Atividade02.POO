@@ -31,6 +31,11 @@ public class LivroResource {
         return livroService.listarLivros();
     }
 
+    @GetMapping("/buscar/{id}")
+    public Livro dadosLivro(@RequestParam String id) {
+        return livroService.dadosLivro(id);
+    }
+
     @GetMapping("/buscar")
     public ResponseEntity<List<Livro>> buscarNomeAutor(@RequestParam String busca) {
         List<Livro> livrosEncontrados = livroService.buscarNomeAutor(busca);

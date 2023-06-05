@@ -16,6 +16,21 @@ public class LivroService {
         return livros;
     }
 
+    public Livro dadosLivro(String id) {
+        Livro livro = new Livro();
+            livroRepository.findAll().forEach(l -> {
+                if (l.id_livro.equals(id)) {
+                    livro.id_livro = l.id_livro;
+                    livro.nome_livro = l.nome_livro;
+                    livro.autor_livro = l.autor_livro;
+                    livro.editora_livro = l.editora_livro;
+                    livro.ano_livro = l.ano_livro;
+                    livro.preco_livro = l.preco_livro;
+                }
+            });
+        return livro;
+    }
+
     public List<Livro> buscarNomeAutor(String titulo){
         List<Livro> livros = new ArrayList<>();
         List<Livro> busca = new ArrayList<>();
