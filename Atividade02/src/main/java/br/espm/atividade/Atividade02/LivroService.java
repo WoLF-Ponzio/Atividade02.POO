@@ -25,11 +25,14 @@ public class LivroService {
     public List<Livro> buscarNomeAutor(String titulo){
         List<Livro> livros = new ArrayList<>();
         List<Livro> busca = new ArrayList<>();
+        if(titulo.isEmpty()){
+            livroRepository.findAll().forEach(l -> livros.add(new Livro(l.id_livro,l.nome_livro,l.autor_livro,l.editora_livro,l.ano_livro,l.preco_livro)));
+            return livros;
+        }
             livroRepository.findAll().forEach(l -> livros.add(l));
             for (Livro livro : livros) {
                 if (livro.nome_livro.contains(titulo) || livro.autor_livro.contains(titulo)) {
                     busca.add(livro);
-                    break;
                 }
             }
         return busca;
