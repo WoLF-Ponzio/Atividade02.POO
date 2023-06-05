@@ -55,23 +55,25 @@ const uuidv4 = () => {
 }
 
 async function cadastrarLivro() {
-    var livro = {
-        "ID": uuidv4(),
-        "Nome": document.getElementById('detail-nome_livro').value,
-        "Autor": document.getElementById('detail-autor_livro').value,
-        "Editora": document.getElementById('detail-editora_livro').value,
-        "Ano": document.getElementById('detail-ano_livro').value,
-        "Preço": document.getElementById('detail-preco_livro').value   
+    var Livro = {
+        "id_livro": uuidv4(),
+        "nome_livro": document.getElementById('detail-nome_livro').value,
+        "autor_livro": document.getElementById('detail-autor_livro').value,
+        "editora_livro": document.getElementById('detail-editora_livro').value,
+        "ano_livro": document.getElementById('detail-ano_livro').value,
+        "preco_livro": document.getElementById('detail-preco_livro').value   
     }
 
+    let envio = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(Livro)
+    };
+    
     try {
-        const response = await fetch('http://localhost:8080/livros', {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'            },
-            body: JSON.stringify(livro)
-        });
+       let response = await fetch("http://localhost:8080/livros/post", envio);
        listLivros();
     } catch (error) {
         console.error("Error:", error);
@@ -144,5 +146,7 @@ async function buscarLivro() {
     } catch (error) {
     console.error("Error:", error);
     }
+    
+    
 }
 

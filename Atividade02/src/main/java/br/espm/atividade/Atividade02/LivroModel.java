@@ -33,6 +33,7 @@ public class LivroModel {
 
     public LivroModel(Livro livro){
         this.id_livro = livro.id_livro;
+        this.nome_livro = livro.nome_livro;
         this.autor_livro = livro.autor_livro;
         this.editora_livro = livro.editora_livro;
         this.ano_livro = livro.ano_livro;

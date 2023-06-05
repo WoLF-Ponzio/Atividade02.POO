@@ -23,23 +23,13 @@ public class Livro {
 
     }
 
-    public Livro(String id, String titulo, String autor, String editora, int ano, double preco){
+    public Livro(String id, String nome_livro, String autor, String editora, int ano, double preco){
         this.id_livro = id;
-        this.nome_livro = titulo;
+        this.nome_livro = nome_livro;
         this.autor_livro = autor;
         this.editora_livro = editora;
         this.ano_livro = ano;
         this.preco_livro = preco;
     }
 
-   @Override
-   public String toString() {
-    String aux = "";
-    aux += "nome: " + nome_livro + "\n";
-    aux += "autor: " + autor_livro + "\n";
-    aux += "editora: " + editora_livro + "\n";
-    aux += "ano: " + ano_livro + "\n";
-    aux += "preco: " + preco_livro + "\n";
-    return aux;
-   }
 }
