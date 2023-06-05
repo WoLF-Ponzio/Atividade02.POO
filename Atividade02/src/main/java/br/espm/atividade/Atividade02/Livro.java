@@ -1,6 +1,5 @@
 package br.espm.atividade.Atividade02;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
