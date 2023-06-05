@@ -31,8 +31,8 @@ public class LivroResource {
     }
 
     @GetMapping("/buscar")
-    public ResponseEntity<List<Livro>> buscarLivrosPorTitulo(@RequestParam String titulo) {
-        List<Livro> livrosEncontrados = livroService.buscarLivrosPorTitulo(titulo);
+    public ResponseEntity<List<Livro>> buscarNomeAutor(@RequestParam String busca) {
+        List<Livro> livrosEncontrados = livroService.buscarNomeAutor(busca);
 
         if (!livrosEncontrados.isEmpty()) {
             return ResponseEntity.ok(livrosEncontrados);

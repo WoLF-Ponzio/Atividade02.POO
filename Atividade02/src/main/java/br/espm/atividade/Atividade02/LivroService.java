@@ -16,12 +16,12 @@ public class LivroService {
         return livros;
     }
 
-    public List<Livro> buscarLivrosPorTitulo(String titulo){
+    public List<Livro> buscarNomeAutor(String titulo){
         List<Livro> livros = new ArrayList<>();
         List<Livro> busca = new ArrayList<>();
             livroRepository.findAll().forEach(l -> livros.add(l));
             for (Livro livro : livros) {
-                if (livro.nome_livro.equalsIgnoreCase(titulo)) {
+                if (livro.nome_livro.contains(titulo) || livro.autor_livro.contains(titulo)) {
                     busca.add(livro);
                     break;
                 }
