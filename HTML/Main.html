@@ -25,29 +25,35 @@
         <div class="form">
             <div class="row">
                 <div class="col p-2">
-                    <input type="text" class="form-control" id="detail-id" name="detail-id" placeholder="id" readonly disabled>
+                    <input type="text" class="form-control" id="detail-id_livro" name="detail-id" placeholder="ID" readonly disabled>
                 </div>
                 <div class="col p-2">
-                    <input type="text" class="form-control" id="detail-nome" name="detail-nome" placeholder="nome">
+                    <input type="text" class="form-control" id="detail-nome_livro" name="detail-nome_livro" placeholder="Nome">
                 </div>
             </div>
             <div class="row">
                 <div class="col p-2">
-                    <input type="text" class="form-control" id="detail-sigla" name="detail-sigla" placeholder="sigla">
+                    <input type="text" class="form-control" id="detail-autor_livro" name="detail-autor_livro" placeholder="Autor">
                 </div>
                 <div class="col p-2">
-                    <input type="text" class="form-control" id="detail-simbolo" name="detail-simbolo" placeholder="símbolo">
+                    <input type="text" class="form-control" id="detail-editora_livro" name="detail-editora_livro" placeholder="Editora">
+                </div>
+                <div class="col p-2">
+                  <input type="text" class="form-control" id="detail-ano_livro" name="detail-ano_livro" placeholder="Ano">
+                </div>
+                <div class="col p-2">
+                  <input type="text" class="form-control" id="detail-preco_livro" name="detail-preco_livro" placeholder="Preço">
                 </div>
             </div>
-            <button onclick="cleanMoeda();">new</button>
-            <button onclick="createMoeda();">save</button>
+            <button onclick="calvarLivro();">Limpar campos</button>
+            <button onclick="cadastrarLivro();">Cadastrar novo livro</button>
         </div>
     </div>
     <div class="container-fluid p-2">
         <table class="table table-hover">
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">Código</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Autor</th>
                 <th scope="col">Editora</th>

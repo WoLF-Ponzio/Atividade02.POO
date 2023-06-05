@@ -53,3 +53,96 @@ const uuidv4 = () => {
         (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
     );
 }
+
+async function cadastrarLivro() {
+    var livro = {
+        "ID": uuidv4(),
+        "Nome": document.getElementById('detail-nome_livro').value,
+        "Autor": document.getElementById('detail-autor_livro').value,
+        "Editora": document.getElementById('detail-editora_livro').value,
+        "Ano": document.getElementById('detail-ano_livro').value,
+        "Preço": document.getElementById('detail-preco_livro').value   
+    }
+
+    try {
+        const response = await fetch('http://localhost:8080/livros', {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'            },
+            body: JSON.stringify(livro)
+        });
+       listLivros();
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+async function explodirLivro(id) {
+    try {
+        const response = await fetch(`http://localhost:8080/livros/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        listMoedas();
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+async function detailMoeda(id) {
+    try {
+        const result = await fetch(`http://localhost:8080/livros/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        var moeda = await result.json();
+        document.getElementById('detail-id').value = moeda.id;
+        document.getElementById('detail-nome').value = moeda.nome;
+        document.getElementById('detail-sigla').value = moeda.sigla;
+        document.getElementById('detail-simbolo').value = moeda.simbolo;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+async function filterMoedas() {
+    var filter = document.getElementById('id_livro').value.toString().trim();
+    if (filter.length < 3) return;
+    listLivros();
+}
+
+async function calvarLivro() {
+    document.getElementById('detail-id_livro').value = '';
+    document.getElementById('detail-nome_livro').value = '';
+    document.getElementById('detail-autor_livro').value = '';
+    document.getElementById('detail-editora_livro').value = '';
+    document.getElementById('detail-ano_livro').value = '';
+    document.getElementById('detail-preco_livro').value = '';
+}
+
+async function buscarLivro() {
+    try{
+        const result = await fetch(`http//localhost:8080/livros/buscar`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        var livrosPesq = await result.json();
+        document.getElementById('detail-id_livro').value = livro.id;
+        document.getElementById('detail-nome_livro').value = livro.nome;
+        document.getElementById('detail-autor_livro').value = livro.autor;
+        document.getElementById('detail-editora_livro').value = livro.editora;
+        document.getElementById('detail-ano_livro').value = livro.ano;
+        document.getElementById('detail-preco_livro').value = livro.preco;
+
+    } catch (error) {
+    console.error("Error:", error);
+    }
+}
+
