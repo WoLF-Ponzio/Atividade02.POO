@@ -32,14 +32,14 @@ public class LivroModel {
     double preco_livro;
 
     public LivroModel(Livro livro){
-        this.id_livro = newLivro().id_livro;
-        this.autor_livro = newLivro().autor_livro;
-        this.editora_livro = newLivro().editora_livro;
-        this.ano_livro = newLivro().ano_livro;
-        this.preco_livro = newLivro().preco_livro;
+        this.id_livro = livro.id_livro;
+        this.autor_livro = livro.autor_livro;
+        this.editora_livro = livro.editora_livro;
+        this.ano_livro = livro.ano_livro;
+        this.preco_livro = livro.preco_livro;
     }
 
-    public Livro newLivro() {
+    public Livro newLiv() {
         return new Livro(
             id_livro,
             nome_livro,
