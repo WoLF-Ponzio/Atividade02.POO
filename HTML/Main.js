@@ -65,7 +65,7 @@ async function cadastrarLivro() {
     }
 
     try {
-        const response = await fetch('http://localhost:8080/livros', {
+        const response = await fetch('http://localhost:8080/livros/post', {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
