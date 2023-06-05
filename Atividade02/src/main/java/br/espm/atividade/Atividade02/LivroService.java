@@ -29,6 +29,10 @@ public class LivroService {
         return busca;
     }
 
+    public void deletar(String id) {
+        livroRepository.deleteById(id);
+    }
+
     public Livro novoLivro(Livro livro) {
         LivroModel livModel = new LivroModel(livro);
         return livroRepository.save(livModel.newLiv());

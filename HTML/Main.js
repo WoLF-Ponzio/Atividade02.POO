@@ -13,7 +13,7 @@ async function listLivros() {
             var linha = document.createElement('tr');
 
             var id = document.createElement('td');
-            id.innerHTML = '<a href="javascript:detaillivroModel(\'' + livroModel.id_livro + '\');">' + livroModel.id_livro + '</a>';
+            id.innerHTML = '<a href="javascript:selecionarLivro(\'' + livroModel.id_livro + '\');">' + livroModel.id_livro + '</a>';
             linha.appendChild(id);
 
             var titulo = document.createElement('td');
@@ -38,7 +38,7 @@ async function listLivros() {
 
 
             var acoes = document.createElement('td');
-            acoes.innerHTML = '<button onClick="deletelivroModel(\'' + livroModel.id_livro + '\');">x</button>';
+            acoes.innerHTML = '<button onClick="deletarLivro(\'' + livroModel.id_livro + '\');">x</button>';
             linha.appendChild(acoes);
 
             lista.appendChild(linha);
@@ -79,7 +79,7 @@ async function cadastrarLivro() {
     }
 }
 
-async function explodirLivro(id) {
+async function deletarLivro(id) {
     try {
         const response = await fetch(`http://localhost:8080/livros/${id}`, {
             method: "DELETE",
@@ -87,13 +87,13 @@ async function explodirLivro(id) {
                 "Content-Type": "application/json"
             }
         });
-        listMoedas();
+        listLivros();
     } catch (error) {
         console.error("Error:", error);
     }
 }
 
-async function detailMoeda(id) {
+async function selecionarLivro(id) {
     try {
         const result = await fetch(`http://localhost:8080/livros/${id}`, {
             method: "GET",
@@ -101,11 +101,11 @@ async function detailMoeda(id) {
                 "Content-Type": "application/json"
             }
         });
-        var moeda = await result.json();
-        document.getElementById('detail-id').value = moeda.id;
-        document.getElementById('detail-nome').value = moeda.nome;
-        document.getElementById('detail-sigla').value = moeda.sigla;
-        document.getElementById('detail-simbolo').value = moeda.simbolo;
+        var livro = await result.json();
+        document.getElementById('detail-id').value = livro.id_livro;
+        document.getElementById('detail-nome').value = livro.nome_livro;
+        document.getElementById('detail-sigla').value = livro.sigla_livro;
+        document.getElementById('detail-simbolo').value = livro.simbolo_livro;
     } catch (error) {
         console.error("Error:", error);
     }
