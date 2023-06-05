@@ -39,7 +39,7 @@ public class LivroResource {
         return livroService.dadosLivro(id);
     }
 
-    @Query("/buscar")
+    @GetMapping("/buscar")
     public ResponseEntity<List<Livro>> buscarNomeAutor(@Param("busca") String busca) {
         List<Livro> livrosEncontrados = livroService.buscarNomeAutor(busca);
 

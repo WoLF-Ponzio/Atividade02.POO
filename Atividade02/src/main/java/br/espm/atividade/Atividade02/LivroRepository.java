@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LivroRepository extends JpaRepository<Livro, String> {
-    @Query("SELECT * FROM Livro WHERE nome_livro LIKE %:busca% OR autor_livro LIKE %:busca%")
-    List<Livro> buscarPorTermo(@Param("busca") String busca);
+
 }
